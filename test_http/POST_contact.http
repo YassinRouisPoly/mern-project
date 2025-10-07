@@ -1,0 +1,10 @@
+### GET request to example server
+POST http://localhost:3000/contact
+Content-Type: application/json
+
+{
+	"email": "test@example.com",
+	"message": "Blablabla"
+}
+
+###
