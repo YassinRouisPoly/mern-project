@@ -13,6 +13,7 @@ Voir ci-dessous.
 ## Etapes du projet
 * [Séance 1](./docs/seance_1.md)
 * [Séance 2](./docs/seance_2.md)
+* [Séance 3](./docs/seance_3.md)
 
 ## Organisation
 
@@ -37,6 +38,13 @@ pnpm install
 # avec npm
 npm install
 ```
+
+### Configuration du fichier ".env"
+Créer un fichier `.env` dans le dossier principal avec :
+```apacheconf
+MONGODB_URI=VOTRE_CLE_MONGO
+```
+Remplacez "VOTRE_CLE_MONGO" avec le lien d'accès qui vous a été fourni pour connecter la base de données.
 ### Lancement
 ```bash
 # avec pnpm

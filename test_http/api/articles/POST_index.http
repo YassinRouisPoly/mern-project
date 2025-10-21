@@ -3,7 +3,8 @@ POST http://localhost:3000/api/articles/
 Content-Type: application/json
 
 {
-    "name": "Concentré de tomates",
-    "brand": "SICAM"
+    "title": "Titre de l'article",
+    "content": "Contenu",
+    "author": "Moi"
 }
 ###

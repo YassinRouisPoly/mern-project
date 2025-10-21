@@ -1,11 +1,11 @@
-
 const express = require('express');
 const router = express.Router();
 
-const { testAPI, createArticle } = require('../controllers/articleController');
+const { createArticle, getAllArticles} = require('../controllers/articleController');
 
 
-router.get("/test", testAPI);
 router.post("/", createArticle);
+router.get("/", getAllArticles);
+
 
 module.exports = router;

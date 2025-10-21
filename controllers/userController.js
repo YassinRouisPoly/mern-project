@@ -1,48 +1,37 @@
-const l = require("../logger");
+const l = require("../logger.js").default;
+const User = require("../models/user");
+const bcrypt = require("bcrypt");
 
-let lastId = 2;
-const users = {
-    1: {
-        name: "Johnny",
-        email: "johnny@gmail.com",
-    },
-    2: {
-        name: "Martina",
-        email: "martina@gmail.com",
+const getAllUsers = async (req, res) => {
+    try {
+        const users = await User.find();
+        res.status(200).json(users);
+    } catch (err) {
+        l.error(err);
+        res.status(500).json({errorMessage: "Erreur lors de la récupération des utilisateurs.", success: false});
     }
 }
 
+const createUser = async (req, res) => {
+    try {
+        const {email, username, password, hashedPassword} = req.body;
+        const userData = {
+            email,
+            username,
+            hashedPassword: hashedPassword ? hashedPassword : bcrypt.hashSync(password, 10)
+        };
+        const newUser = new User(userData);
 
-const getAllUsers = (req, res) => {
-    res.status(201).json(users)
-}
-
-const getUser = (req, res) => {
-    const id = req.params.id;
-    if (Object.hasOwn(users, id)) {
-        res.status(200).json({...users[id], success: true})
-    } else {
-        res.status(404).json({errorMessage: "ID not found", success: false})
-    }
-}
-
-const createUser = (req, res) => {
-    const {
-        name, email
-    } = req.body;
-    if (!name || !email) {
-        res.status(400).json({errorMessage: "Missing required field (name, email)", success: false})
-    } else {
-        users[++lastId] = {
-            name,
-            email
-        }
-        res.status(200).json({...users, success: true})
+        const savedUser = await newUser.save();
+        res.status(201).json(savedUser);
+    } catch (err) {
+        res.status(400).json({
+            errorMessage: "Erreur lors de la création de l'utilisateur",
+            success: false
+        })
     }
 }
 
 module.exports = {
-    getAllUsers,
-    createUser,
-    getUser
+    createUser, getAllUsers
 }

@@ -1,21 +1,32 @@
-const Logger = require("../logger").default;
+const l = require("../logger.js").default;
+const Article = require("../models/article");
 
-const testAPI = (req, res) => {
-    res.status(200).json({
-        message: "Le test a bien fonctionné",
-        success: true
-    })
+const getAllArticles = async (req, res) => {
+    try {
+        const articles = await Article.find();
+        res.status(200).json(articles);
+    } catch (err) {
+        l.error(err);
+        res.status(500).json({errorMessage: "Erreur lors de la récupération des articles.", success: false});
+    }
 }
+
 const createArticle = async (req, res) => {
-    const articleData = req.body;
-    Logger.success("Données reçues par le contrôleur : " + articleData);
-    res.status(201).json({
-        message: "Article créé avec succès via le contrôleur !",
-        article: articleData,
-        success: true
-    })
+    try {
+        const {title, content, author} = req.body;
+        const articleData = {title, content, author};
+        const newArticle = new Article(articleData);
+
+        const savedArticle = await newArticle.save();
+        res.status(201).json(savedArticle);
+    } catch (err) {
+        res.status(400).json({
+            errorMessage: "Erreur lors de la création de l'article",
+            success: false
+        })
+    }
 }
 
 module.exports = {
-    testAPI, createArticle
+    createArticle, getAllArticles
 }
