@@ -6,7 +6,7 @@ const l = require("./logger").default;
 
 const articleRoutes = require("./routes/articleRoutes.js");
 const usersRoutes = require("./routes/userRoutes.js");
-const productsRoutes = require("./routes/productRoutes.js");
+const carsRoutes = require("./routes/carRoutes.js");
 
 const app = express()
 const connectDB = require("./config/db");
@@ -43,8 +43,8 @@ async function loader() {
     l.debug(" ├ # /api/users/*")
     app.use("/api/users", usersRoutes)
 
-    l.debug(" ├ # /api/products/*")
-    app.use("/api/products", productsRoutes)
+    l.debug(" ├ # /api/cars/*")
+    app.use("/api/cars", carsRoutes)
 
     l.debug(" └ Terminé !")
     l.info(`Lancement du serveur sur le port ${port} ...`)

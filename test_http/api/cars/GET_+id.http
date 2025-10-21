@@ -1,0 +1,4 @@
+### GET request to example server
+GET localhost:3000/api/cars/68f76f65f3a2a0448c878bec
+
+###
