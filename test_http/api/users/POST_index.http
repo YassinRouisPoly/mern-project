@@ -1,0 +1,10 @@
+### GET request to example server
+POST localhost:3000/api/users/
+Content-Type: application/json
+
+{
+    "name": "Ahmed",
+    "email": "ahmed@xyz.io"
+}
+
+###

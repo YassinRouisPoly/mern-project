@@ -12,6 +12,7 @@ Voir ci-dessous.
 
 ## Etapes du projet
 * [Séance 1](./docs/seance_1.md)
+* [Séance 2](./docs/seance_2.md)
 
 ## Organisation
 

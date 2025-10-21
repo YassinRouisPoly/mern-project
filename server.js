@@ -1,5 +1,7 @@
 import Logger from "./logger.js";
 import express from "express";
+import articleRoutes from "./routes/articleRoutes.js";
+import userRoutes from "./routes/userRoutes.js";
 
 Logger.info("Démarrage du serveur ...")
 const app = express()
@@ -17,69 +19,11 @@ app.get("/", (req, res) => {
     )
 })
 
-Logger.debug(" ├ GET /about ... [html]")
-app.get("/about", (req, res) => {
-    res.status(200).send(
-        `<h1>Ceci est la route À propos</h1>`
-    )
-})
+Logger.debug(" ├ USE /api/articles ...")
+app.use("/api/articles", articleRoutes)
 
-Logger.debug(" ├ POST /contact ... [json]")
-app.post("/contact", (req, res) => {
-    const {email, message} = req.body;
-
-    if (!email || !message) {
-        return res.status(400).send({
-            message: "Un champ est manquant (email, message).",
-            success: false
-        })
-    }
-
-    res.status(200).json({
-        message: `Message envoyé à ${email} (len. ${message.length})`,
-        success: true
-    })
-})
-
-
-Logger.debug(" ├ GET /api/test ... [json]")
-app.get("/api/test", (req, res) => {
-    res.status(200).json({
-        message: "Le test fonctionne !",
-        success: true
-    })
-})
-
-
-Logger.debug(" ├ GET /api/users ... [json]")
-app.get("/api/users", (req, res) => {
-    const users = [
-        {username: "Martin L."},
-        {username: "Yassin R."},
-        {username: "Abdoul J."}
-    ]
-
-    res.status(200).json({
-        users,
-        success: true
-    })
-})
-
-
-Logger.debug(" ├ POST /api/articles ... [json]")
-app.post("/api/articles", (req, res) => {
-    const articleData = req.body;
-    Logger.success("Données reçues : " + articleData);
-
-    res.status(201).json({
-        message: "Article créé avec succès !",
-        article: {
-            ...articleData,
-            id: Date.now()
-        },
-        success: true
-    })
-})
+Logger.debug(" ├ USE /api/users ...")
+app.use("/api/users", userRoutes)
 
 Logger.debug(" └ Terminé !")
 

@@ -1,4 +1,4 @@
-const Logger = require("../logger");
+const Logger = require("../logger").default;
 
 const testAPI = (req, res) => {
     res.status(200).json({
