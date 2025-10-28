@@ -14,6 +14,7 @@ Voir ci-dessous.
 * [Séance 1](./docs/seance_1.md)
 * [Séance 2](./docs/seance_2.md)
 * [Séance 3](./docs/seance_3.md)
+* [Séance 4](./docs/seance_4.md)
 
 ## Organisation
 
